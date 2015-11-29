@@ -8,7 +8,7 @@
 
 import Cocoa
 import WebKit
-class ViewController: NSViewController {
+class ViewController: NSViewController, WebFrameLoadDelegate {
     var webView:WebView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,8 @@ class ViewController: NSViewController {
         webView.mainFrame.loadRequest(request)
         self.view.addSubview(webView)
     }
-    override func webView(webView: WebView!, didClearWindowObject windowObject: WebScriptObject!, forFrame frame: WebFrame!) {
+    
+    func webView(webView: WebView!, didClearWindowObject windowObject: WebScriptObject!, forFrame frame: WebFrame!) {
         windowObject.setValue(self, forKey: "interOp")
     }
     override class func webScriptNameForSelector(aSelector:Selector) -> String
